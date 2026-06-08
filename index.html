@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دباديبي - متجر الدباديب المحشوة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: #FFF5F7;
+            color: #333;
+        }
+        
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(135deg, #FF6B9D 0%, #FF8E53 100%);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(255,107,157,0.3);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo span {
+            font-size: 32px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #FFD93D;
+            color: #333;
+            font-size: 12px;
+            font-weight: 700;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* ===== HERO SECTION ===== */
+        .hero {
+            margin-top: 70px;
+            background: linear-gradient(135deg, #FFE4EC 0%, #FFF0F3 50%, #FFE8F0 100%);
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '🧸';
+            position: absolute;
+            font-size: 200px;
+            opacity: 0.05;
+            top: -20px;
+            left: 10%;
+            transform: rotate(-15deg);
+        }
+        
+        .hero::after {
+            content: '🎀';
+            position: absolute;
+            font-size: 150px;
+            opacity: 0.05;
+            bottom: -20px;
+            right: 10%;
+            transform: rotate(15deg);
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            color: #FF6B9D;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #FF6B9D 0%, #FF8E53 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(255,107,157,0.4);
+        }
+        
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255,107,157,0.5);
+        }
+        
+        /* ===== PRODUCTS SECTION ===== */
+        .products-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            color: #FF6B9D;
+            margin-bottom: 50px;
+            font-weight: 800;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        /* ===== PRODUCT CARD ===== */
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(255,107,157,0.2);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #FF6B9D;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        
+        .product-badge.sale {
+            background: #FF4757;
+        }
+        
+        .product-badge.new {
+            background: #2ED573;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .product-desc {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .price-current {
+            font-size: 24px;
+            font-weight: 800;
+            color: #FF6B9D;
+        }
+        
+        .price-old {
+            font-size: 16px;
+            color: #999;
+            text-decoration: line-through;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-add-cart {
+            flex: 1;
+            background: linear-gradient(135deg, #FF6B9D 0%, #FF8E53 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        .btn-add-cart:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255,107,157,0.4);
+        }
+        
+        .btn-favorite {
+            width: 45px;
+            height: 45px;
+            border: 2px solid #FFE4EC;
+            background: white;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-favorite:hover {
+            background: #FFE4EC;
+            border-color: #FF6B9D;
+        }
+        
+        /* ===== CART SIDEBAR ===== */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .cart-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+        
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            max-width: 90%;
+            height: 100%;
+            background: white;
+            z-index: 2001;
+            transition: right 0.3s;
+            display: flex;
+            flex-direction: column;
+            box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+        }
+        
+        .cart-sidebar.active {
+            right: 0;
+        }
+        
+        .cart-header {
+            padding: 20px;
+            background: linear-gradient(135deg, #FF6B9D 0%, #FF8E53 100%);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .cart-header h2 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+        
+        .cart-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+        
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            background: #FFF5F7;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        
+        .cart-item-info {
+            flex: 1;
+        }
+        
+        .cart-item-name {
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .cart-item-price {
+            color: #FF6B9D;
+            font-weight: 700;
+        }
+        
+        .cart-item-remove {
+            background: #FFE4EC;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: #FF6B9D;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .cart-item-remove:hover {
+            background: #FF6B9D;
+            color: white;
+        }
+        
+        .cart-footer {
+            padding: 20px;
+            border-top: 2px solid #FFE4EC;
+        }
+        
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .cart-total span:last-child {
+            color: #FF6B9D;
+            font-size: 24px;
+        }
+        
+        .btn-checkout {
+            width: 100%;
+            background: linear-gradient(135deg, #FF6B9D 0%, #FF8E53 100%);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        .btn-checkout:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(255,107,157,0.4);
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+        
+        .empty-cart-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+        
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 60px 20px 30px;
+            margin-top: 80px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #FF6B9D;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #aaa;
+            text-decoration: none;
+            line-height: 2;
+            font-size: 15px;
+        }
+        
+        .footer-section a:hover {
+            color: #FF6B9D;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #888;
+        }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* ===== TOAST NOTIFICATION ===== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #333;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            z-index: 3000;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        
+        /* ===== QUANTITY CONTROL ===== */
+        .qty-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .qty-btn {
+            width: 28px;
+            height: 28px;
+            border: 2px solid #FF6B9D;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            color: #FF6B9D;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        
+        .qty-btn:hover {
+            background: #FF6B9D;
+            color: white;
+        }
+        
+        .qty-value {
+            font-weight: 700;
+            font-size: 16px;
+            min-width: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo">
+                <span>🧸</span>
+                دباديبي
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#products">المنتجات</a></li>
+                <li><a href="#about">من نحن</a></li>
+                <li><a href="#contact">تواصل معنا</a></li>
+            </ul>
+            <div class="cart-icon" onclick="toggleCart()">
+                🛒
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <h1>🧸 أجمل الدباديب المحشوة</h1>
+        <p>اكتشف تشكيلتنا الرائعة من الدباديب الناعمة والمحشوة بجودة عالية. هدايا مثالية لمن تحب!</p>
+        <a href="#products" class="hero-btn">تسوق الآن 🛍️</a>
+    </section>
+
+    <!-- PRODUCTS SECTION -->
+    <section class="products-section" id="products">
+        <h2 class="section-title">✨ منتجاتنا المميزة</h2>
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be inserted here by JavaScript -->
+        </div>
+    </section>
+
+    <!-- CART SIDEBAR -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>🛒 سلة المشتريات</h2>
+            <button class="cart-close" onclick="toggleCart()">×</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">
+                <div class="empty-cart-icon">🛒</div>
+                <p>سلة المشتريات فارغة</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>الإجمالي:</span>
+                <span id="cartTotal">0 ر.س</span>
+            </div>
+            <button class="btn-checkout" onclick="checkout()">إتمام الشراء 💳</button>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <!-- FOOTER -->
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🧸 دباديبي</h3>
+                <p>متجر متخصص في بيع الدباديب والدمى المحشوة بأعلى جودة. نقدم لك تجربة تسوق فريدة مع منتجات رائعة وهدايا لا تُنسى.</p>
+            </div>
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <p><a href="#home">الرئيسية</a></p>
+                <p><a href="#products">المنتجات</a></p>
+                <p><a href="#about">من نحن</a></p>
+                <p><a href="#contact">تواصل معنا</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>تواصل معنا</h3>
+                <p>📧 info@dabadibi.com</p>
+                <p>📱 +966 50 123 4567</p>
+                <p>📍 الرياض، المملكة العربية السعودية</p>
+            </div>
+            <div class="footer-section">
+                <h3>تابعنا</h3>
+                <p><a href="#">📸 انستغرام</a></p>
+                <p><a href="#">📘 تويتر</a></p>
+                <p><a href="#">▶️ يوتيوب</a></p>
+                <p><a href="#">💬 واتساب</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 دباديبي - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== PRODUCTS DATA =====
+        const products = [
+            {
+                id: 1,
+                name: "دب أبيض مع وردة",
+                desc: "دب أبيض ناعم مع وردة حمراء، هدية رومانسية مثالية",
+                price: 89,
+                oldPrice: 120,
+                image: "https://kimi-web-img.moonshot.cn/img/m.media-amazon.com/acd76c4a29852282040d041cdd97b5771384fdc6.jpg",
+                badge: "sale",
+                badgeText: "خصم 26%"
+            },
+            {
+                id: 2,
+                name: "دب بني كلاسيكي",
+                desc: "دب بني كلاسيكي بربطة عنق، مناسب لجميع المناسبات",
+                price: 75,
+                oldPrice: null,
+                image: "https://kimi-web-img.moonshot.cn/img/i.ebayimg.com/a86aaa831977a1a3efd096d61bfabb02f1e36cf7.jpg",
+                badge: "new",
+                badgeText: "جديد"
+            },
+            {
+                id: 3,
+                name: "دب وردي كاواي",
+                desc: "دب وردي ناعم بتصميم كاواي لطيف، مثالي للأطفال",
+                price: 65,
+                oldPrice: 85,
+                image: "https://kimi-web-img.moonshot.cn/img/plushthis.com/b8fa7532e9a0cb1ce8e1c7b206d9bd7366eca1bf.jpg",
+                badge: "sale",
+                badgeText: "خصم 24%"
+            },
+            {
+                id: 4,
+                name: "دب بني بملابس",
+                desc: "دب بني بملابس ملونة، تصميم فريد وجذاب",
+                price: 95,
+                oldPrice: null,
+                image: "https://kimi-web-img.moonshot.cn/img/m.media-amazon.com/2b52bda9dc551f9df1d96fafdf9f35dde3c3158f.jpg",
+                badge: "new",
+                badgeText: "جديد"
+            },
+            {
+                id: 5,
+                name: "دب بني فاخر",
+                desc: "دب بني فاخر بفراء ناعم، جودة عالية وتصميم أنيق",
+                price: 110,
+                oldPrice: 150,
+                image: "https://kimi-web-img.moonshot.cn/img/i5.walmartimages.com/be9fbf3a66fa65c7d51b98c2946fe93f3a0fdd8f.jpeg",
+                badge: "sale",
+                badgeText: "خصم 27%"
+            },
+            {
+                id: 6,
+                name: "مجموعة دباديب كاواي",
+                desc: "مجموعة دباديب كاواي ملونة، هدية مثالية للمحبين",
+                price: 199,
+                oldPrice: 250,
+                image: "https://kimi-web-img.moonshot.cn/img/cdn.faire.com/7fac66139f08155314cc4c9efa691907ec236707.jpeg",
+                badge: "sale",
+                badgeText: "خصم 20%"
+            }
+        ];
+
+        // ===== CART STATE =====
+        let cart = [];
+
+        // ===== RENDER PRODUCTS =====
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = products.map(product => `
+                <div class="product-card">
+                    ${product.badge ? `<span class="product-badge ${product.badge}">${product.badgeText}</span>` : ''}
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="product-desc">${product.desc}</p>
+                        <div class="product-price">
+                            <span class="price-current">${product.price} ر.س</span>
+                            ${product.oldPrice ? `<span class="price-old">${product.oldPrice} ر.س</span>` : ''}
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-add-cart" onclick="addToCart(${product.id})">
+                                🛒 أضف للسلة
+                            </button>
+                            <button class="btn-favorite" onclick="toggleFavorite(this)">
+                                🤍
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ===== ADD TO CART =====
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            
+            updateCart();
+            showToast(`✅ تمت إضافة ${product.name} للسلة!`);
+        }
+
+        // ===== REMOVE FROM CART =====
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCart();
+        }
+
+        // ===== UPDATE CART =====
+        function updateCart() {
+            const cartCount = document.getElementById('cartCount');
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            cartCount.textContent = totalItems;
+            cartTotal.textContent = `${totalPrice} ر.س`;
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-cart-icon">🛒</div>
+                        <p>سلة المشتريات فارغة</p>
+                    </div>
+                `;
+            } else {
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">${item.price} ر.س × ${item.quantity}</div>
+                            <div class="qty-control">
+                                <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                                <span class="qty-value">${item.quantity}</span>
+                                <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                            </div>
+                        </div>
+                        <button class="cart-item-remove" onclick="removeFromCart(${item.id})">×</button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // ===== UPDATE QUANTITY =====
+        function updateQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    updateCart();
+                }
+            }
+        }
+
+        // ===== TOGGLE CART =====
+        function toggleCart() {
+            const overlay = document.getElementById('cartOverlay');
+            const sidebar = document.getElementById('cartSidebar');
+            overlay.classList.toggle('active');
+            sidebar.classList.toggle('active');
+        }
+
+        // ===== TOGGLE FAVORITE =====
+        function toggleFavorite(btn) {
+            btn.textContent = btn.textContent === '🤍' ? '❤️' : '🤍';
+            if (btn.textContent === '❤️') {
+                showToast('❤️ تمت الإضافة للمفضلة!');
+            }
+        }
+
+        // ===== SHOW TOAST =====
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // ===== CHECKOUT =====
+        function checkout() {
+            if (cart.length === 0) {
+                showToast('⚠️ السلة فارغة!');
+                return;
+            }
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            showToast(`💳 جاري إتمام الشراء بقيمة ${total} ر.س...`);
+            setTimeout(() => {
+                cart = [];
+                updateCart();
+                toggleCart();
+                showToast('🎉 تم إتمام الطلب بنجاح! شكراً لتسوقك');
+            }, 2000);
+        }
+
+        // ===== INITIALIZE =====
+        renderProducts();
+    </script>
+
+</body>
+</html>
